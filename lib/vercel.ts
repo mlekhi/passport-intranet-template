@@ -210,19 +210,20 @@ export async function attachPassport({
   );
 }
 
-// Protect a project end to end: create a connector, attach Passport, then read
-// the project back and confirm protection actually took. Never trusts the PATCH
-// response alone — the dashboard's protection status comes from this read-back.
+// Link a project's Passport to an existing, IdP-wired connector (the org's one
+// connector, configured once), then read the project back and confirm it took.
+// Reuses one connector rather than creating one per deploy — Passport is a
+// 3-way binding (project → passport.connectorId → connector → IdP). Never
+// trusts the PATCH response alone; protection status comes from the read-back.
 export async function protectProject({
   projectId,
-  connector = defaultConnectorConfig(),
+  connectorId = requiredEnv("CONNECTOR_ID"),
   deploymentType = "all",
 }: {
   projectId: string;
-  connector?: Json;
+  connectorId?: string;
   deploymentType?: PassportDeploymentType;
 }): Promise<ProtectionStatus> {
-  const { id: connectorId } = await createConnector(connector, projectId);
   await attachPassport({ idOrName: projectId, connectorId, deploymentType });
 
   const status = toProtectionStatus(await getProject(projectId));
