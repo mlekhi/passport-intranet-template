@@ -227,9 +227,10 @@ export async function linkProjectToConnector({
       `/connect/connectors/${encodeURIComponent(connectorId)}/projects/${encodeURIComponent(projectId)}`,
       teamScope(),
     ),
-    // The endpoint requires a JSON body; an empty object links all environments
-    // (matching `vercel connect attach` with no --environment flag).
-    { method: "POST", body: JSON.stringify({}) },
+    // The endpoint requires an `environments` array; link all three (matching
+    // `vercel connect attach` with no --environment flag) so the production
+    // deployment is covered.
+    { method: "POST", body: JSON.stringify({ environments: ["production", "preview", "development"] }) },
     token,
   );
 }
