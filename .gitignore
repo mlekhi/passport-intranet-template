@@ -8,3 +8,9 @@ out
 *.tsbuildinfo
 next-env.d.ts
 .DS_Store
+
+# Local-only test harness — tests are scratch, never committed
+*.test.ts
+*.test.tsx
+vitest.config.ts
+/test/
