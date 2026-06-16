@@ -52,8 +52,7 @@ export function SitesTable({ sites }: { sites: ProtectionStatus[] }) {
             <tr className="border-b border-black/10 text-left text-xs uppercase tracking-wide text-black/50 dark:border-white/10 dark:text-white/50">
               <Th>Microsite</Th>
               <Th>URL</Th>
-              <Th>Protection</Th>
-              <Th>Environments</Th>
+              <Th>Passport</Th>
               <Th>Connector</Th>
               <Th>Last deploy</Th>
               <Th>Updated</Th>
@@ -62,7 +61,7 @@ export function SitesTable({ sites }: { sites: ProtectionStatus[] }) {
           <tbody>
             {filtered.length === 0 ? (
               <tr>
-                <td colSpan={7} className="px-4 py-8 text-center text-sm text-black/45 dark:text-white/45">
+                <td colSpan={6} className="px-4 py-8 text-center text-sm text-black/45 dark:text-white/45">
                   No microsites match.
                 </td>
               </tr>
@@ -92,11 +91,6 @@ export function SitesTable({ sites }: { sites: ProtectionStatus[] }) {
                   </Td>
                   <Td>
                     <ProtectionBadge protectedSite={site.protected} />
-                  </Td>
-                  <Td>
-                    <span className="text-xs text-black/70 dark:text-white/70">
-                      {environmentsLabel(site.deploymentType)}
-                    </span>
                   </Td>
                   <Td>
                     {site.connectorName ? (
@@ -169,21 +163,6 @@ function DeployState({ state }: { state?: string }) {
         ? "text-red-600 dark:text-red-400"
         : "text-amber-600 dark:text-amber-400";
   return <span className={`text-xs font-medium ${tone}`}>{state.toLowerCase()}</span>;
-}
-
-function environmentsLabel(deploymentType?: string): string {
-  switch (deploymentType) {
-    case "all":
-      return "All deployments";
-    case "all_except_custom_domains":
-      return "All (excl. custom domains)";
-    case "preview":
-      return "Preview only";
-    case "prod_deployment_urls_and_all_previews":
-      return "Production + previews";
-    default:
-      return "—";
-  }
 }
 
 function Th({ children }: { children: React.ReactNode }) {
