@@ -25,7 +25,10 @@ export type VercelProject = {
     deploymentType?: PassportDeploymentType;
   } | null;
   targets?: { production?: { alias?: string[] } };
+  framework?: string | null;
+  createdAt?: number;
   updatedAt?: number;
+  latestDeployments?: { readyState?: string; url?: string; createdAt?: number }[];
 };
 
 export type ConnectorResult = { id: string };
@@ -51,7 +54,10 @@ export type ProtectionStatus = {
   url?: string;
   connectorId?: string;
   deploymentType?: PassportDeploymentType;
+  framework?: string | null;
+  createdAt?: number;
   updatedAt?: number;
+  lastDeploymentState?: string;
 };
 
 type TeamScope = { teamId?: string; slug?: string };
@@ -94,7 +100,10 @@ export function toProtectionStatus(project: VercelProject): ProtectionStatus {
     url: alias ? asHttpsUrl(alias) : undefined,
     connectorId,
     deploymentType: project.passport?.deploymentType,
+    framework: project.framework,
+    createdAt: project.createdAt,
     updatedAt: project.updatedAt,
+    lastDeploymentState: project.latestDeployments?.[0]?.readyState,
   };
 }
 
