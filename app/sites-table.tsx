@@ -100,6 +100,10 @@ export function SitesTable({ sites }: { sites: ProtectionStatus[] }) {
                           <div className="font-mono text-[11px] text-black/45 dark:text-white/45">{site.connectorIdp}</div>
                         ) : null}
                       </div>
+                    ) : site.connectorId ? (
+                      <span title={site.connectorId} className="font-mono text-[11px] text-black/55 dark:text-white/55">
+                        {site.connectorId.slice(0, 14)}…
+                      </span>
                     ) : (
                       <Dash />
                     )}
