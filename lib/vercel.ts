@@ -33,6 +33,8 @@ export type VercelProject = {
 
 export type ConnectorResult = { id: string };
 
+export type Connector = { id: string; name?: string; uid?: string };
+
 export type DeploymentFile = { file: string; data: string; encoding: "base64" };
 
 export type DeployResult = { id: string; projectId: string; url: string };
@@ -58,6 +60,8 @@ export type ProtectionStatus = {
   createdAt?: number;
   updatedAt?: number;
   lastDeploymentState?: string;
+  connectorName?: string;
+  connectorIdp?: string;
 };
 
 type TeamScope = { teamId?: string; slug?: string };
@@ -107,9 +111,34 @@ export function toProtectionStatus(project: VercelProject): ProtectionStatus {
   };
 }
 
+export async function listConnectors(): Promise<Connector[]> {
+  const token = requiredEnv("VERCEL_ACCESS_TOKEN");
+  const body = await vercel<unknown>(apiPath("/v1/connect/connectors", teamScope()), { method: "GET" }, token);
+  if (Array.isArray(body)) return body as Connector[];
+  return ((body as { connectors?: Connector[] })?.connectors ?? []) as Connector[];
+}
+
+// Join connector name + IdP host onto each status by connectorId. Pure so it's
+// testable without network. The IdP host is the part of the connector uid
+// before the slash (e.g. "integrator-5929276.okta.com/oidc-test").
+export function withConnectorInfo(statuses: ProtectionStatus[], connectors: Connector[]): ProtectionStatus[] {
+  const byId = new Map(connectors.map((c) => [c.id, c]));
+  return statuses.map((s) => {
+    const connector = s.connectorId ? byId.get(s.connectorId) : undefined;
+    if (!connector) return s;
+    return {
+      ...s,
+      connectorName: connector.name ?? connector.uid,
+      connectorIdp: connector.uid?.split("/")[0],
+    };
+  });
+}
+
 export async function listProtectionStatus(): Promise<ProtectionStatus[]> {
-  const projects = await listProjects();
-  return projects.map(toProtectionStatus);
+  // Connectors are best-effort: a missing Connect permission shouldn't blank
+  // the whole dashboard, just the connector names.
+  const [projects, connectors] = await Promise.all([listProjects(), listConnectors().catch(() => [])]);
+  return withConnectorInfo(projects.map(toProtectionStatus), connectors);
 }
 
 // Deploy a set of static files as their own Vercel project, then wait for the
