@@ -47,7 +47,15 @@ export function SitesTable({ sites }: { sites: ProtectionStatus[] }) {
       </div>
 
       <div className="overflow-hidden rounded-lg border border-black/10 dark:border-white/10">
-        <table className="w-full text-sm">
+        <table className="w-full table-fixed text-sm">
+          <colgroup>
+            <col className="w-[18%]" />
+            <col className="w-[26%]" />
+            <col className="w-[13%]" />
+            <col className="w-[17%]" />
+            <col className="w-[13%]" />
+            <col className="w-[13%]" />
+          </colgroup>
           <thead>
             <tr className="border-b border-black/10 text-left text-xs uppercase tracking-wide text-black/50 dark:border-white/10 dark:text-white/50">
               <Th>Microsite</Th>
@@ -81,7 +89,7 @@ export function SitesTable({ sites }: { sites: ProtectionStatus[] }) {
                         href={site.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="font-mono text-xs text-blue-600 hover:underline dark:text-blue-400"
+                        className="font-mono text-xs break-all text-blue-600 hover:underline dark:text-blue-400"
                       >
                         {site.url.replace(/^https?:\/\//, "")}
                       </a>
