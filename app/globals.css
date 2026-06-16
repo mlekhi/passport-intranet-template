@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
   line-height: 1.5;
   color: #111;
   padding: 1.5rem;
@@ -49,5 +49,5 @@ th {
 }
 
 code {
-  font-family: ui-monospace, monospace;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
 }
