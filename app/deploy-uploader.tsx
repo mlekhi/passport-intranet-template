@@ -80,7 +80,7 @@ export function DeployUploader() {
       }
 
       setStatus("success");
-      setMessage("Deployed and protected.");
+      setMessage("Live and protected by Passport.");
       setUrl(payload.url);
       router.refresh();
     } catch (error) {
@@ -117,7 +117,7 @@ export function DeployUploader() {
 
   return (
     <section
-      aria-label="Microsite upload"
+      aria-label="Deploy a Passport-protected microsite"
       tabIndex={0}
       onKeyDown={handleKeyDown}
       onDragEnter={(event) => {
@@ -172,11 +172,11 @@ export function DeployUploader() {
         </div>
 
         <h2 className="mt-6 text-3xl font-semibold tracking-tight sm:text-4xl">
-          {isDragging ? "Drop to upload." : "Drop it. It’s live."}
+          {isDragging ? "Drop to deploy with Passport." : "Deploy it. Passport protects it."}
         </h2>
 
         <p className="mx-auto mt-3 max-w-lg text-sm leading-6 text-black/55 dark:text-white/55">
-          Drag and drop a file, a folder, or .zip to deploy. Or choose a{" "}
+          Drop in a static microsite, folder, or .zip. Or choose a{" "}
           <button
             type="button"
             onClick={() => zipInputRef.current?.click()}
@@ -196,7 +196,9 @@ export function DeployUploader() {
           </button>
           .
         </p>
-        <p className="mt-1 text-sm text-black/40 dark:text-white/40">No configuration. Passport protection is applied automatically.</p>
+        <p className="mt-1 text-sm text-black/40 dark:text-white/40">
+          Passport applies access protection before your deployment URL is returned.
+        </p>
 
         {selection ? (
           <div className="mx-auto mt-8 max-w-md rounded-xl border border-black/10 bg-white p-3 text-left shadow-sm dark:border-white/15 dark:bg-white/[0.05]">
@@ -227,7 +229,7 @@ export function DeployUploader() {
               disabled={deploying}
               className="mt-3 flex h-10 w-full items-center justify-center rounded-lg bg-black px-4 text-sm font-medium text-white transition-colors hover:bg-black/80 disabled:cursor-wait disabled:bg-black/40 dark:bg-white dark:text-black dark:hover:bg-white/80 dark:disabled:bg-white/40"
             >
-              {deploying ? "Deploying…" : "Deploy microsite"}
+              {deploying ? "Deploying with Passport…" : "Deploy with Passport"}
             </button>
 
             {deploying ? (
