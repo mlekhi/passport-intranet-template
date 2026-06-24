@@ -9,12 +9,24 @@ export async function filesFromForm(form: FormData): Promise<IngestFile[]> {
   for (const value of form.values()) {
     if (value instanceof File) parts.push(value);
   }
+  const paths = form.getAll("path").filter((value): value is string => typeof value === "string");
 
   if (parts.length === 1 && parts[0].name.toLowerCase().endsWith(".zip")) {
     return expandZip(new Uint8Array(await parts[0].arrayBuffer()));
   }
 
   return Promise.all(
-    parts.map(async (file) => ({ path: file.name, bytes: new Uint8Array(await file.arrayBuffer()) })),
+    parts.map(async (file, index) => ({
+      path: safeUploadPath(paths[index]) ?? file.name,
+      bytes: new Uint8Array(await file.arrayBuffer()),
+    })),
   );
+}
+
+function safeUploadPath(path: string | undefined): string | null {
+  const normalized = path?.replaceAll("\\", "/").trim();
+  if (!normalized) return null;
+
+  const segments = normalized.split("/").filter((segment) => segment && segment !== "." && segment !== "..");
+  return segments.length > 0 ? segments.join("/") : null;
 }
