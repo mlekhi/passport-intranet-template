@@ -1,11 +1,19 @@
 import { listProtectionStatus, type ProtectionStatus } from "@/lib/vercel";
-import { SitesTable } from "./sites-table";
+import { SitesTable, type StatusFilter } from "./sites-table";
 
 // Server Component — runs on the server, so the access token never reaches
 // the browser. Reads protection state live from the Vercel API.
 export const dynamic = "force-dynamic";
 
-export default async function DashboardHome() {
+export default async function DashboardHome({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string; status?: string }>;
+}) {
+  const params = await searchParams;
+  const query = (params.q ?? "").trim();
+  const status = normalizeStatus(params.status);
+
   let sites: ProtectionStatus[] = [];
   let error: string | null = null;
 
@@ -35,6 +43,7 @@ export default async function DashboardHome() {
 
   const protectedCount = sites.filter((s) => s.protected).length;
   const unprotectedCount = sites.length - protectedCount;
+  const filtered = filterSites(sites, query, status);
 
   return (
     <div className="space-y-8">
@@ -44,9 +53,27 @@ export default async function DashboardHome() {
         <Metric label="Unprotected" value={unprotectedCount} tone={unprotectedCount > 0 ? "warn" : "muted"} />
       </section>
 
-      <SitesTable sites={sites} />
+      <SitesTable sites={filtered} query={query} status={status} />
     </div>
   );
+}
+
+function normalizeStatus(value?: string): StatusFilter {
+  return value === "protected" || value === "unprotected" ? value : "all";
+}
+
+function filterSites(sites: ProtectionStatus[], query: string, status: StatusFilter): ProtectionStatus[] {
+  const q = query.toLowerCase();
+  return sites.filter((s) => {
+    if (status === "protected" && !s.protected) return false;
+    if (status === "unprotected" && s.protected) return false;
+    if (!q) return true;
+    return (
+      s.name.toLowerCase().includes(q) ||
+      (s.url ?? "").toLowerCase().includes(q) ||
+      (s.connectorName ?? "").toLowerCase().includes(q)
+    );
+  });
 }
 
 function Metric({

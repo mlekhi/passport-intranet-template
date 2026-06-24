@@ -1,7 +1,6 @@
 // Passport-management engine, ported from the deploy-with-passport demo.
 // Server-side only — it reads VERCEL_ACCESS_TOKEN. Never import from a
 // Client Component.
-import "server-only";
 
 const API = "https://api.vercel.com";
 
