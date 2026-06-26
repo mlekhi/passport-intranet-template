@@ -176,13 +176,7 @@ function ProtectionBadge({ protectedSite }: { protectedSite: boolean }) {
 
 function DeployState({ state }: { state?: string }) {
   if (!state) return <Dash />;
-  const tone =
-    state === "READY"
-      ? "text-emerald-600 dark:text-emerald-400"
-      : state === "ERROR" || state === "CANCELED"
-        ? "text-red-600 dark:text-red-400"
-        : "text-amber-600 dark:text-amber-400";
-  return <span className={`text-xs font-medium ${tone}`}>{state}</span>;
+  return <span className="text-xs font-medium">{state}</span>;
 }
 
 function Th({ children }: { children: React.ReactNode }) {

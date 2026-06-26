@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 href="https://github.com/mlekhi"
                 target="_blank"
                 rel="noreferrer"
-                className="underline underline-offset-2 transition-colors hover:text-black/70 dark:hover:text-white/70"
+                className="font-bold transition-colors hover:text-black/70 dark:hover:text-white/70"
               >
                 Maya
               </a>
@@ -48,7 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 href="https://vercel.com/dashboard"
                 target="_blank"
                 rel="noreferrer"
-                className="underline underline-offset-2 transition-colors hover:text-black/70 dark:hover:text-white/70"
+                className="font-bold transition-colors hover:text-black/70 dark:hover:text-white/70"
               >
                 Vercel Dashboard
               </a>
