@@ -37,7 +37,16 @@ export default async function DashboardHome() {
   const unprotectedCount = sites.length - protectedCount;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-12">
+      <header className="border-b border-black/10 pb-8 dark:border-white/10">
+        <h1 className="text-4xl font-bold tracking-tight" style={{ textWrap: "balance" }}>
+          Passport Intranet
+        </h1>
+        <p className="mt-2 text-sm text-black/50 dark:text-white/50">
+          Passport-protected microsites, deployed and monitored from one place.
+        </p>
+      </header>
+
       <section className="grid grid-cols-3 gap-3" aria-label="Summary">
         <Metric label="Microsites" value={sites.length} />
         <Metric label="Protected" value={protectedCount} tone="ok" />
