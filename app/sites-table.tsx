@@ -44,16 +44,21 @@ export function SitesTable({ sites }: { sites: ProtectionStatus[] }) {
             className="h-10 w-full rounded-lg border border-black/15 bg-transparent pl-9 pr-4 text-sm placeholder:text-black/40 focus:border-black/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:border-white/15 dark:placeholder:text-white/40 dark:focus:border-white/30 dark:focus-visible:ring-white/20"
           />
         </div>
-        <select
-          value={status}
-          onChange={(e) => setStatus(e.target.value as StatusFilter)}
-          aria-label="Filter by protection status"
-          className="h-10 rounded-lg border border-black/15 bg-transparent px-4 text-sm focus:border-black/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:border-white/15 dark:focus:border-white/30 dark:focus-visible:ring-white/20"
-        >
-          <option value="all">All</option>
-          <option value="protected">Protected</option>
-          <option value="unprotected">Unprotected</option>
-        </select>
+        <div className="relative">
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value as StatusFilter)}
+            aria-label="Filter by protection status"
+            className="h-10 appearance-none rounded-lg border border-black/15 bg-transparent pl-4 pr-9 text-sm focus:border-black/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:border-white/15 dark:focus:border-white/30 dark:focus-visible:ring-white/20"
+          >
+            <option value="all">All</option>
+            <option value="protected">Protected</option>
+            <option value="unprotected">Unprotected</option>
+          </select>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-black/40 dark:text-white/40">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
       </div>
 
       <div className="overflow-hidden rounded-lg border border-black/10 dark:border-white/10">
