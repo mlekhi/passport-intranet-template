@@ -38,7 +38,7 @@ export default async function DashboardHome() {
 
   return (
     <div className="space-y-12">
-      <header className="border-b border-black/10 pb-8 dark:border-white/10">
+      <header className="pb-4">
         <h1 className="text-4xl font-medium tracking-tight" style={{ textWrap: "balance" }}>
           Passport Intranet
         </h1>
