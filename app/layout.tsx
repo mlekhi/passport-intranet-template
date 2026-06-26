@@ -28,8 +28,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </header>
         <main className="mx-auto max-w-5xl px-6 py-8">{children}</main>
-        <footer className="px-6 py-4">
-          <div className="mx-auto flex max-w-5xl items-center justify-between border-t border-black/10 pt-4 text-xs text-black/40 dark:border-white/10 dark:text-white/40">
+        <footer className="py-4">
+          <div className="mx-auto flex max-w-5xl items-center justify-between border-t border-black/10 px-6 pt-4 text-xs text-black/40 dark:border-white/10 dark:text-white/40">
             <span>
               Made with love by{" "}
               <a
