@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="font-sans antialiased">
         <header className="border-b border-black/10 dark:border-white/10">
-          <div className="mx-auto flex max-w-5xl items-center justify-between gap-6 px-6 py-4">
+          <div className="flex items-center justify-between gap-6 px-6 py-4">
             <NavLinks />
           </div>
         </header>
