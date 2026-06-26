@@ -72,7 +72,7 @@ export function SitesTable({ sites }: { sites: ProtectionStatus[] }) {
             <col className="w-[13%]" />
           </colgroup>
           <thead>
-            <tr className="border-b border-black/10 text-left text-xs text-black/50 dark:border-white/10 dark:text-white/50">
+            <tr className="border-b border-black/10 text-left text-sm text-black/50 dark:border-white/10 dark:text-white/50">
               <Th>Microsite</Th>
               <Th>URL</Th>
               <Th>Passport</Th>
@@ -106,7 +106,7 @@ export function SitesTable({ sites }: { sites: ProtectionStatus[] }) {
                         href={site.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="font-mono text-xs text-black/70 hover:text-black dark:text-white/60 dark:hover:text-white"
+                        className="font-mono text-sm text-black/70 hover:text-black dark:text-white/60 dark:hover:text-white"
                       >
                         {site.url.replace(/^https?:\/\//, "")}
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="ml-1 inline-block opacity-50 align-middle">
@@ -128,7 +128,7 @@ export function SitesTable({ sites }: { sites: ProtectionStatus[] }) {
                         <div className="min-w-0">
                           {site.connectorName ? (
                             <>
-                              <div className="text-xs font-medium">{site.connectorName}</div>
+                              <div className="text-sm font-medium">{site.connectorName}</div>
                               {site.connectorIdp ? (
                                 <div className="font-mono text-[11px] text-black/45 dark:text-white/45">
                                   {site.connectorIdp}
@@ -151,7 +151,7 @@ export function SitesTable({ sites }: { sites: ProtectionStatus[] }) {
                     <DeployState state={site.lastDeploymentState} />
                   </Td>
                   <Td>
-                    <span className="text-xs text-black/55 dark:text-white/55">{formatDate(site.updatedAt)}</span>
+                    <span className="text-sm text-black/55 dark:text-white/55">{formatDate(site.updatedAt)}</span>
                   </Td>
                 </tr>
               ))
@@ -167,14 +167,14 @@ export function SitesTable({ sites }: { sites: ProtectionStatus[] }) {
 function ProtectionBadge({ protectedSite }: { protectedSite: boolean }) {
   if (!protectedSite) {
     return (
-      <span className="inline-flex items-center gap-1.5 text-xs">
+      <span className="inline-flex items-center gap-1.5 text-sm">
         <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
         Unprotected
       </span>
     );
   }
   return (
-    <span className="inline-flex items-center gap-1.5 text-xs">
+    <span className="inline-flex items-center gap-1.5 text-sm">
       <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
       Protected
     </span>
@@ -183,7 +183,7 @@ function ProtectionBadge({ protectedSite }: { protectedSite: boolean }) {
 
 function DeployState({ state }: { state?: string }) {
   if (!state) return <Dash />;
-  return <span className="text-xs font-medium">{state.charAt(0) + state.slice(1).toLowerCase()}</span>;
+  return <span className="text-sm font-medium">{state.charAt(0) + state.slice(1).toLowerCase()}</span>;
 }
 
 function Th({ children }: { children: React.ReactNode }) {
@@ -236,7 +236,7 @@ function FrameworkBadge({ framework }: { framework?: string | null }) {
       </svg>
     );
   }
-  return <span className="text-xs text-black/45 dark:text-white/45">{framework ?? "static"}</span>;
+  return <span className="text-sm text-black/45 dark:text-white/45">{framework ?? "static"}</span>;
 }
 
 function Dash() {
