@@ -29,15 +29,21 @@ export function SitesTable({ sites }: { sites: ProtectionStatus[] }) {
         <label htmlFor="sites-search" className="sr-only">
           Search microsites
         </label>
-        <input
-          id="sites-search"
-          type="search"
-          name="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search microsites…"
-          className="h-8 flex-1 min-w-50 rounded-md border border-black/10 bg-transparent px-3 text-sm placeholder:text-black/40 focus:border-black/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:border-white/15 dark:placeholder:text-white/40 dark:focus:border-white/40 dark:focus-visible:ring-white/20"
-        />
+        <div className="relative flex-1 min-w-50">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-black/40 dark:text-white/40">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input
+            id="sites-search"
+            type="search"
+            name="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search microsites…"
+            className="h-10 w-full rounded-full border border-black/15 bg-transparent pl-10 pr-4 text-sm placeholder:text-black/40 focus:border-black/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:border-white/15 dark:placeholder:text-white/40 dark:focus:border-white/30 dark:focus-visible:ring-white/20"
+          />
+        </div>
         <div className="flex items-center gap-1">
           <FilterButton active={status === "all"} onClick={() => setStatus("all")}>
             All
