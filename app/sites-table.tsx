@@ -166,7 +166,18 @@ export function SitesTable({ sites }: { sites: ProtectionStatus[] }) {
 
 function DeployState({ state }: { state?: string }) {
   if (!state) return <Dash />;
-  return <span className="text-sm font-medium">{state.charAt(0) + state.slice(1).toLowerCase()}</span>;
+  const dot =
+    state === "READY"
+      ? "bg-emerald-500"
+      : state === "ERROR" || state === "CANCELED"
+        ? "bg-red-500"
+        : "bg-amber-500";
+  return (
+    <span className="inline-flex items-center gap-1.5">
+      <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${dot}`} />
+      {state.charAt(0) + state.slice(1).toLowerCase()}
+    </span>
+  );
 }
 
 function Th({ children }: { children: React.ReactNode }) {
