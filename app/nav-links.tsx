@@ -15,7 +15,7 @@ export function NavLinks() {
         >
           <span className="text-xs font-bold">▲</span>
         </div>
-        <span className="min-w-0 text-sm font-semibold leading-tight">Passport Admin</span>
+        <span className="min-w-0 text-base font-semibold leading-tight">Passport Admin</span>
       </Link>
       <nav aria-label="Primary" className="flex shrink-0 items-center gap-1 text-sm">
         <Link
