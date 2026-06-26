@@ -38,7 +38,7 @@ export default async function DashboardHome() {
 
   return (
     <div className="space-y-8">
-      <section className="grid grid-cols-3 gap-3">
+      <section className="grid grid-cols-3 gap-3" aria-label="Summary">
         <Metric label="Microsites" value={sites.length} />
         <Metric label="Protected" value={protectedCount} tone="ok" />
         <Metric label="Unprotected" value={unprotectedCount} tone={unprotectedCount > 0 ? "warn" : "muted"} />

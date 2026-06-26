@@ -26,12 +26,17 @@ export function SitesTable({ sites }: { sites: ProtectionStatus[] }) {
   return (
     <section className="space-y-3">
       <div className="flex flex-wrap items-center gap-2">
+        <label htmlFor="sites-search" className="sr-only">
+          Search microsites
+        </label>
         <input
+          id="sites-search"
           type="search"
+          name="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search microsites…"
-          className="h-8 flex-1 min-w-50 rounded-md border border-black/10 bg-transparent px-3 text-sm outline-none placeholder:text-black/40 focus:border-black/30 dark:border-white/15 dark:placeholder:text-white/40 dark:focus:border-white/40"
+          className="h-8 flex-1 min-w-50 rounded-md border border-black/10 bg-transparent px-3 text-sm placeholder:text-black/40 focus:border-black/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:border-white/15 dark:placeholder:text-white/40 dark:focus:border-white/40 dark:focus-visible:ring-white/20"
         />
         <div className="flex items-center gap-1">
           <FilterButton active={status === "all"} onClick={() => setStatus("all")}>
@@ -47,7 +52,7 @@ export function SitesTable({ sites }: { sites: ProtectionStatus[] }) {
       </div>
 
       <div className="overflow-hidden rounded-lg border border-black/10 dark:border-white/10">
-        <table className="w-full table-fixed text-sm">
+        <table className="w-full table-fixed text-sm" aria-label="Microsites protection status">
           <colgroup>
             <col className="w-[18%]" />
             <col className="w-[26%]" />
@@ -146,8 +151,9 @@ function FilterButton({ active, onClick, children }: { active: boolean; onClick:
     <button
       type="button"
       onClick={onClick}
+      aria-pressed={active}
       className={
-        "h-8 rounded-md px-3 text-xs font-medium transition-colors " +
+        "h-8 rounded-md px-3 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 dark:focus-visible:ring-white/30 " +
         (active
           ? "bg-black text-white dark:bg-white dark:text-black"
           : "text-black/60 hover:bg-black/5 dark:text-white/60 dark:hover:bg-white/10")
@@ -232,5 +238,5 @@ function Dash() {
 
 function formatDate(epochMs?: number): string {
   if (!epochMs) return "—";
-  return new Date(epochMs).toISOString().slice(0, 10);
+  return new Date(epochMs).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
 }
