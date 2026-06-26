@@ -182,7 +182,7 @@ function DeployState({ state }: { state?: string }) {
       : state === "ERROR" || state === "CANCELED"
         ? "text-red-600 dark:text-red-400"
         : "text-amber-600 dark:text-amber-400";
-  return <span className={`text-xs font-medium ${tone}`}>{state.toLowerCase()}</span>;
+  return <span className={`text-xs font-medium ${tone}`}>{state}</span>;
 }
 
 function Th({ children }: { children: React.ReactNode }) {
