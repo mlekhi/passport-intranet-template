@@ -30,9 +30,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
               <div className="min-w-0 leading-tight">
                 <h1 className="text-sm font-semibold">Passport Admin</h1>
-                <p className="truncate text-xs text-black/50 dark:text-white/50">
-                  Protection status across all microsites
-                </p>
               </div>
             </Link>
             <nav aria-label="Primary" className="flex shrink-0 items-center gap-1 text-sm">
