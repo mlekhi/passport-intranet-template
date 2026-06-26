@@ -62,7 +62,7 @@ function Metric({ label, value }: { label: string; value: number }) {
   return (
     <div className="rounded-lg border border-black/10 p-5 dark:border-white/10">
       <div className="text-sm text-black/50 dark:text-white/50">{label}</div>
-      <div className="mt-2 text-4xl font-semibold tabular-nums">{value}</div>
+      <div className="mt-2 text-4xl font-normal tabular-nums">{value}</div>
     </div>
   );
 }

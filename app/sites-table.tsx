@@ -176,7 +176,7 @@ function ProtectionBadge({ protectedSite }: { protectedSite: boolean }) {
 
 function DeployState({ state }: { state?: string }) {
   if (!state) return <Dash />;
-  return <span className="text-xs font-medium">{state}</span>;
+  return <span className="text-xs font-medium">{state.charAt(0) + state.slice(1).toLowerCase()}</span>;
 }
 
 function Th({ children }: { children: React.ReactNode }) {
