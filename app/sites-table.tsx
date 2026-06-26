@@ -178,14 +178,14 @@ function FilterButton({ active, onClick, children }: { active: boolean; onClick:
 function ProtectionBadge({ protectedSite }: { protectedSite: boolean }) {
   if (!protectedSite) {
     return (
-      <span className="inline-flex items-center gap-1.5 text-amber-600 dark:text-amber-400">
+      <span className="inline-flex items-center gap-1.5 text-xs text-amber-600 dark:text-amber-400">
         <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
         Unprotected
       </span>
     );
   }
   return (
-    <span className="inline-flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
+    <span className="inline-flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400">
       <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
       Protected
     </span>
